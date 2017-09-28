@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>es6的语法解析</title>
+	</head>
+	<body>
+		<h2></h2>
+		<script>
+			//es5的函数
+			function sum(x,y,z){
+				let total=0
+				if(x)total+=x
+				if(y)total+=y
+				if(z)total+=z
+				console.log(`toatal:${total}`)  //es6的魔术字符串
+			}
+			sum(5,"",8)
+			
+			//es5的函数
+			function sum2(...m){                //es6的...对象扩展符,不明确到底有多少个传入参数
+				let total=0
+				for(var i of m){                //原来的是for in语句,现在es6是for of 语句,效果一样
+					total+=i; 
+				}
+				console.log(`total:${total}`)
+			}
+			sum2(8,7,4,2,4)    
+			
+			//es6的箭头函数
+			let sum3=(...m)=>{                  //es6的...m 表示动态的变量,可以容纳众多的参数,不止一个
+				let total=0
+				for(var i of m){                //原来的是for in语句,现在es6是for of 语句,效果一样
+					total+=i; 
+				}
+				console.log(`total:${total}`)
+			}
+			sum3(8,9.4,2,341,5)
+			 
+			//es6的数组的结构赋值 对号入座
+			var [x,y]=[4,9]                 
+			console.log(...[4,8])            //es6的...对象扩展符运算符(函数扩展运算), 分解[4,8] 数组,将每个对象展开
+			
+			
+			let arr1=[3,5];let arr2=[5,9]
+			console.log("concat:"+arr1.concat(arr2))  //数组的合并 ,类型不变
+			
+			
+			console.log([...arr1,...arr2])          //...arr1将数组1进行分解,...arr2将数组2进行分解,类型不变
+			
+			//es6的数组解构赋值,...m表示多个对象
+			var [x,...m]=[4,8,8,13,4]  
+			console.log([x,...m])
+			
+			let [a,b,c]="es6"                        //对字符串 进行拆解,分解
+			console.log([a,b,c])                     //数组类型
+			console.log(a,b,c) ; console.log(typeof a) //字符串类型
+			
+			let xy=[...'es6']
+			console.log(xy)                            //对字符串拆解
+			
+			//es5写法
+			let checkLogin = function () {             //Promise 是es6异步请求服务器接口的对象   以前的接口都是一层一层吊取接口的,函数里面嵌套函数
+				return	new Promise(function (resolve,reject) {
+					let flag = document.cookie.indexOf("userId")>-1?true:false
+					
+					if (flag=true) {
+						resolve({//接口调取成功的回调
+							status:0,
+							result:true
+						})
+					} else {                           
+						reject("error 接口调取失败!!!")//接口调取失败的回调
+					}
+				})
+			}
+			
+			//es6写法
+			let getUserInfo = ()=>{
+				return new Promise((resolve,reject)=>{
+					let userInfo = {
+						userId:'101'
+					}
+					resolve(userInfo)
+				})
+			}
+			
+			
+			
+			checkLogin().then(function (res) {//.then() 去获取成功回调 .catch 去获取异常回调
+				if(res.status===0) {
+					console.log(`login success:${res}`)  //成功打印对象
+					return getUserInfo()            //调取第二个Promise对象
+				}
+			}).catch((error)=>{
+				console.log(`errors:${error}`)    //失败 error 打印  error 接口调取失败!!!
+			})
+			
+			
+			//Promise.all()  可以一下子请求多个接口
+			Promise.all([checkLogin(),getUserInfo()]).then(([res1,res2])=>{
+				console.log(`result1:${res1.result}`)
+				console.log(`result2:${res2.userId}`)
+			})
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

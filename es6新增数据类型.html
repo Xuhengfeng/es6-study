@@ -1,0 +1,25 @@
+<script>
+    let a = Symbol();
+    console.log(a);
+    console.log(typeof a)
+
+    // Symbol的用途
+    // 去除覆盖问题
+    let obj = {
+        username: 'json',
+        age: '25',
+        sex: 'man',
+        username: 'king'
+    }
+    console.log(obj.username);
+
+    var username = Symbol();
+    var username2 = Symbol();
+
+    
+    var obj2 = {};
+    obj2[username]="test";
+    obj2[username]="test22";
+    console.log(obj2)
+
+</script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="1"></div>
+    <div class="2"></div>
+    <div class="3"></div>
+    <div class="4"></div>
+    <div class="5"></div>  
+</body>
+</html>
+
+
+
+
+<script>
+    /**
+    *... 表示扩展运算符  对数组和对象都有作用  
+    */
+
+    console.log(...[1,23,4,4]);
+    //1 23 4 4
+
+    console.log(1,34, ...[34,23,43], 5);
+    //1 34 34 23 43 5 
+
+    console.log(document.querySelectorAll('div'));
+    console.log(typeof document.querySelectorAll('div'));
+    //nodeList
+    document.querySelectorAll('div').forEach((item)=>{console.log(item)});
+
+
+    console.log(...document.querySelectorAll('div'));
+    //字符串
+
+    console.log([...document.querySelectorAll('div')]);
+    [...document.querySelectorAll('div')].forEach((item)=>{console.log(item)});
+    //数组
+
+
+    /**
+    * ...主要用于函数调用
+    */
+    function add(x, y) {
+        return x+y;
+    }
+    const numbers = [2, 34];
+    //相当于解构赋值
+    console.log(add(...numbers));
+
+
+    function push(array, ...items) {
+        array.push(...items);
+        return array;
+    }
+    push([23,34,43,4], ...[2,34,43]);
+
+    function f(a,b,c,d) {
+        console.log(arguments);
+        console.log(a)
+        console.log(b)
+        console.log(c)
+        console.log(d)
+    }
+    const args = [1,34,4,5];
+    //f(1, ...args, ...[1]);
+
+
+    f.apply(null, args);
+
+    console.log(new Date(2015,2,4))
+</script>

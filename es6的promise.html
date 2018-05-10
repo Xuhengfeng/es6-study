@@ -1,0 +1,55 @@
+<script>
+//做饭
+function cook(){
+    console.log('开始做饭。');
+    return new Promise((resolve, reject)=> {        //做一些异步操作
+        setTimeout(()=> {
+            resolve('鸡蛋炒饭');
+        }, 1000);
+    });
+}
+ 
+//吃饭
+function eat(data){
+    console.log('开始吃饭：' + data);
+    return new Promise((resolve, reject)=> {        //做一些异步操作
+        setTimeout(()=> {
+            resolve('一块碗和一双筷子');
+        }, 2000);
+    }); 
+}
+ 
+function wash(data){
+    console.log('开始洗碗：' + data);
+    return new Promise((resolve, reject)=> {        //做一些异步操作
+        setTimeout(()=> {
+            resolve('干净的碗筷');
+        }, 2000);
+    });
+}
+
+
+cook()
+.then((data)=> {
+    return eat(data);
+})
+.then((data)=> {
+    console.log(data);
+    return eat(data);
+}) 
+.then((data)=> {
+    console.log(data);
+    wash(data);
+})
+// cook()
+// .then((data)=> {
+//     return eat(data);
+// })
+// .then((data)=> {
+//     return wash(data);
+// })
+// .then((data)=> {
+//     console.log(data);
+// });
+
+</script>

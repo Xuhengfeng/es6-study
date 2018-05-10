@@ -1,0 +1,49 @@
+<script>
+    //对象尽量静态化, 一旦定义,就不得随意添加新的属性
+
+    const a = {};
+    Object.assign(a, {x: 3});
+    console.log(a);
+
+    // good
+    const aa = { x: null };
+    aa.x = 3;
+    console.log(aa)
+
+
+    // good
+    // let getKey;
+    // const obj = {
+    //     id: 5,
+    //     name: 'San Francisco',
+    //     [getKey('enabled')]: true,
+    // };
+    // console.log(obj)
+
+    // good
+    let ref='ref';
+    const atom = {
+        ref,
+        value: 1,
+        addValue(value) {
+            return atom.value + value;
+        }
+    };
+    console.log(atom)
+
+
+    let b = [1,34,4,5];
+    const c = [...b];
+    console.log(c)
+    b[0]=2;
+    console.log(b)
+
+
+    //这里只赋值了引用的指针
+    let bb = [23,4,43,5];
+    let cc = bb;
+    console.log(cc);
+    bb[0]=3;
+    console.log(bb)
+    console.log(cc)
+</script>
